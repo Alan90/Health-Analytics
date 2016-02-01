@@ -1,0 +1,65 @@
+---
+title: "tutorial 2"
+author: "Tang DingLun"
+date: "31 January 2016"
+output: html_document
+---
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+library(ggplot2)
+library(dplyr)
+```
+
+(a)(i + ii)
+```{r}
+labs
+mean(labs$WaitTime)
+ggplot(data = labs) + geom_bar(mapping = aes(x = labs$WaitTime))
+```
+
+```{r}
+table(labs$SvcSat)
+ggplot(data = labs) + geom_bar(mapping = aes(x = labs$SvcSat))
+```
+
+(b)
+```{r, echo=FALSE}
+SvcStat <- as.numeric(labs$SvcSat)
+cor(labs$AGE, SvcStat)
+Gender <- as.numeric(labs$Gender)
+cor(Gender, SvcStat)
+```
+# By applying the correlation function on the two variables, we can conclude that Age and Gener are negatively correlated to Service Satisfaction.
+
+(c)
+```{r}
+cor(labs$WaitTime,SvcStat)
+```
+# We can conclude that wait time and service satisfaction are negatively correlated.
+
+(d)
+```{r}
+BMI <- labs$WT / (labs$HT * labs$HT)
+print(BMI)
+TC <- as.numeric(labs$TC)
+cor(TC,BMI)
+```
+# We conclude that there is a slight positive correlation between BMI and Total Cholesterol
+
+(e)
+```{r}
+attach(labs)
+BMI.lm = lm(BMI ~ AGE,SBP,TC)
+AGE = 45
+SBP = 135 
+TC = 150
+df = data.frame(AGE,SBP,TC)
+predict(BMI.lm, df, interval="predict")
+```
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
