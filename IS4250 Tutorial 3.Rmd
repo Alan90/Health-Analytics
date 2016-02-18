@@ -1,0 +1,40 @@
+---
+title: "IS4250 Tutorial 3"
+author: "DingLun"
+date: "12 February 2016"
+output: html_document
+---
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+#(a)
+```{r}
+dc = c("Good", "Poor")
+dp = c(3,4)
+ca = c(7,2)
+df = data.frame(dc,dp,ca)
+complicationRate = df$ca / (df$ca + df$dp)
+complicationRate
+```
+
+#(b)
+```{r}
+mat = matrix(c(3,4,7,2),2,2)
+fisher.test(mat)
+# ==> ACCEPT the null hypothesis that X,Y (diabetic control, diabetics control/absent) at the 0.05 level, namely that the odds of concluding the difference between the two rates is different for good and bad diabetic control
+# Conclude that the odds in the rate of good diabetic control is 17 times the odds of poor diabetic control
+```
+
+#(c)
+```{r}
+tbl = table(df$dc,df$dp)
+chisq.test(tbl)
+#Pearson's Chi-squared test with Yates'
+#continuity correction
+#data:  tbl
+#X-squared = 0, df = 1, p-value = 1
+#Given the small cell values in the contingency table, it is therefore unwise to use t-test.
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
